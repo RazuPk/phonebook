@@ -9,10 +9,6 @@ use Firebase\JWT\JWT;
 class LoginController extends Controller
 {
     
-    function tokenTest(){
-        return "Token is ok";
-    }
-    
     function onLogin(Request $request){
          $username=$request->input('username');
         $password=$request->input('password');
@@ -24,7 +20,7 @@ class LoginController extends Controller
                 'site' => 'http://demo.com',
                 'user' => $username,
                 'iat' => time(),
-                'exp' => time()+60
+                'exp' => time()+3600
             ];
             $jwt = JWT::encode($payload, $key, 'HS256');
             return response()->json(['token'=>$jwt,'status'=>'Login success']);
@@ -33,4 +29,5 @@ class LoginController extends Controller
         }
 
     }
+
 }
